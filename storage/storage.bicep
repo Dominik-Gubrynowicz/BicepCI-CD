@@ -14,7 +14,7 @@ resource hqstorageaccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
 
 
 resource blob 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-02-01' =  [ for contName in containers: {
-  name: '${hqstorageaccount}/default/${contName}'
+  name: '${hqstorageaccount.name}/default/${contName}'
 }]
 
 output storageId string = hqstorageaccount.properties.primaryEndpoints.blob
