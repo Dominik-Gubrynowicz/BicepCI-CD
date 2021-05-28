@@ -14,7 +14,7 @@ param storageGeoRedundant bool = false
 param vmname string = 'simplevm'
 @secure()
 param adminPassword string
-param adminUsername string = 'admin'
+param adminUsername string = 'domi10052'
 param osDiskType string = 'Premium_LRS'
 param vmsize string = 'Standard_B1ms'
 
