@@ -44,7 +44,7 @@ resource simplevm_networkcard 'Microsoft.Network/networkInterfaces@2020-11-01' =
           subnet: {
             id: subnetRef
           }
-          privateIPAllocationMethod: 'Static'
+          privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
             id: resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', publicIpName)
           }
