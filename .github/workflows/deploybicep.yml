@@ -33,3 +33,4 @@ jobs:
           subscriptionId: ${{ env.SubscriptionId }}
           resourceGroupName: ${{ env.RGName }}
           template: main.bicep
+          parameters: adminPassword=${{ secrets.PASSWORD }}
