@@ -14,26 +14,22 @@ jobs:
     env:
       RGName: 'bicep-deploy-rg'
       RGLocation: 'northeurope'
+      SubscriptionId: 2b7e7f2a-f9a7-49cb-a159-f0228b1b3aaa
     environment: production
 
     steps:
-    - name: Checkout source code
-      uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
 
-    - name: Login to azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Login to azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    #bild ARM from bicep
-    - name: Run Bicep build
-      uses: aliencube/bicep-build-actions@v0.3
-      with:
-        files: main.bicep
-
-    # Checks the result
-    - name: Check the result
-      shell: bash
-      run: |
-        shopt -s globstar
-        ls -altR **/sample*.*
+      - name: Deploy Template
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          subscriptionId: ${{ env.SubscriptionId }}
+          resourceGroupName: ${{ env.RGName }}
+          template: main.bicep
