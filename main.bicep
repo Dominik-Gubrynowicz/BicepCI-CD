@@ -3,7 +3,7 @@
 param location string = resourceGroup().location
 
 //storage account parameters
-param storageName string = 'storage-${uniqueString(resourceGroup().id)}'
+param storageName string = 'storage${uniqueString(resourceGroup().id)}'
 param conatiners array = [
   'scripts'
   'inovices'
