@@ -1,0 +1,36 @@
+
+name: 'AzureBicepDeploy'
+
+on:
+  push:
+    branches:
+      - main
+    
+jobs:
+
+  AzureBicepDeploy:
+    name: 'AzureBicepDeploy'
+    runs-on: 'ubuntu-latest'
+    env:
+      RGName: 'bicep-deploy-rg'
+      RGLocation: 'northeurope'
+    environment: production
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDS }}
+
+    #bild ARM from bicep
+    - name: Run Bicep build
+      uses: aliencube/bicep-build-actions@v0.3
+      with:
+        files: main.bicep
+
+    # Checks the result
+    - name: Check the result
+      shell: bash
+      run: |
+        shopt -s globstar
+        ls -altR **/sample*.*
